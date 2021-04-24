@@ -7,7 +7,9 @@ Entry for the Ludum Dare 48 Game Jam. A game about going through the cycles of a
   - [X] Frame texture for main GUI
   - [X] Button texture
   - [X] Player texture
-- [ ] Get player movement working
+- [X] Player
+	- [X] Player movement
+	- [X] Arrow Indicator
 - [ ] Map generation
   - [ ] Collisions
   - [ ] Goal marker
