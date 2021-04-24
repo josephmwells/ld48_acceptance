@@ -10,7 +10,7 @@ var arrow = {
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	position = Vector2(80, 80)
+	hide_arrow()
 
 func move(pos, duration):
 	var tween = Tween.new()
@@ -27,7 +27,7 @@ func show_arrow():
 func hide_arrow():
 	$ArrowSprite.hide()
 
-func change_arrow_direction(pos):
+func update_arrow_direction(pos):
 	var angle = position.direction_to(pos).angle()
 	if(angle > -(3 * PI) / 4):
 		$ArrowSprite.position = Vector2(0, -1) * 16
