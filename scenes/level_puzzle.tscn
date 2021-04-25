@@ -6,11 +6,8 @@
 [ext_resource path="res://scenes/background_growing.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/goal.tscn" type="PackedScene" id=5]
 
-[sub_resource type="RectangleShape2D" id=92]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 120, 80 )
-
-[sub_resource type="ConvexPolygonShape2D" id=1]
-points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 
 [sub_resource type="ConvexPolygonShape2D" id=2]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
@@ -21,10 +18,13 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 [sub_resource type="ConvexPolygonShape2D" id=4]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 
-[sub_resource type="OccluderPolygon2D" id=5]
+[sub_resource type="ConvexPolygonShape2D" id=5]
+points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+
+[sub_resource type="OccluderPolygon2D" id=6]
 polygon = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 
-[sub_resource type="ConvexPolygonShape2D" id=6]
+[sub_resource type="ConvexPolygonShape2D" id=7]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 
 [sub_resource type="ConvexPolygonShape2D" id=8]
@@ -294,32 +294,32 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 1/navigation_offset = Vector2( 0, 0 )
 1/shape_offset = Vector2( 0, 0 )
 1/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-1/shape = SubResource( 1 )
+1/shape = SubResource( 2 )
 1/shape_one_way = false
 1/shape_one_way_margin = 1.0
 1/shapes = [ {
 "autotile_coord": Vector2( 0, 1 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 1 ),
+"shape": SubResource( 2 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 }, {
 "autotile_coord": Vector2( 1, 1 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 2 ),
+"shape": SubResource( 3 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 }, {
 "autotile_coord": Vector2( 1, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 3 ),
+"shape": SubResource( 4 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 }, {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 4 ),
+"shape": SubResource( 5 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 1/z_index = 0
@@ -790,7 +790,7 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 10/autotile/icon_coordinate = Vector2( 0, 0 )
 10/autotile/tile_size = Vector2( 16, 16 )
 10/autotile/spacing = 0
-10/autotile/occluder_map = [ Vector2( 0, 0 ), SubResource( 5 ) ]
+10/autotile/occluder_map = [ Vector2( 0, 0 ), SubResource( 6 ) ]
 10/autotile/navpoly_map = [  ]
 10/autotile/priority_map = [  ]
 10/autotile/z_index_map = [  ]
@@ -798,20 +798,21 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 10/navigation_offset = Vector2( 0, 0 )
 10/shape_offset = Vector2( 0, 0 )
 10/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-10/shape = SubResource( 6 )
+10/shape = SubResource( 7 )
 10/shape_one_way = false
 10/shape_one_way_margin = 1.0
 10/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 6 ),
+"shape": SubResource( 7 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 10/z_index = 0
 
 [node name="LevelPuzzle" type="Node2D"]
 script = ExtResource( 3 )
+dialogue_resource_path = "res://assets/dialogue/dialogue_01"
 
 [node name="BackgroundGrowing" parent="." instance=ExtResource( 4 )]
 position = Vector2( 120, 80 )
@@ -820,7 +821,7 @@ position = Vector2( 120, 80 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ClickArea"]
 position = Vector2( 120, 80 )
-shape = SubResource( 92 )
+shape = SubResource( 1 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 
@@ -836,4 +837,5 @@ format = 1
 [connection signal="growing_finished" from="BackgroundGrowing" to="." method="_on_BackgroundGrowing_growing_finished"]
 [connection signal="mouse_entered" from="ClickArea" to="." method="_on_ClickArea_mouse_entered"]
 [connection signal="mouse_exited" from="ClickArea" to="." method="_on_ClickArea_mouse_exited"]
+[connection signal="movement_finished" from="Player" to="." method="_on_Player_movement_finished"]
 [connection signal="area_entered" from="Goal" to="." method="_on_Goal_area_entered"]

@@ -1,11 +1,13 @@
 extends Node2D
-
+class_name LevelDialogue
 
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
+signal intro_finished
 signal write_on_finished
 signal dialogue_finished
+signal level_complete
 
 export(String) var dialogue_resource_path
 var dialogue
@@ -48,13 +50,14 @@ func write_on(duration):
 	tween.queue_free()
 
 func load_dialogue(index):
-	if(index > dialogue.result.size() - 1):
+	if(index > dialogue.result.doctor.size() - 1):
 		return
 	$MarginContainer/RichTextLabel.clear()
-	$MarginContainer/RichTextLabel.append_bbcode(dialogue.result[index])
+	$MarginContainer/RichTextLabel.append_bbcode(dialogue.result.doctor[index])
 
 func _on_BackgroundGrowing_growing_finished():
 	yield(get_tree().create_timer(1), "timeout")
+	emit_signal("intro_finished")
 	$MarginContainer.show()
 	write_on(2)
 
@@ -68,11 +71,16 @@ func _on_MarginContainer_gui_input(event):
 			$MarginContainer/RichTextLabel.percent_visible = 1.0
 			return
 		current_dialogue_index += 1
-		if current_dialogue_index > dialogue.result.size() - 1:
+		if current_dialogue_index > dialogue.result.doctor.size() - 1:
 			emit_signal("dialogue_finished")
+			emit_signal("level_complete")
 			$MarginContainer.hide()
 			return
 		load_dialogue(current_dialogue_index)
 		write_on(2)
 
 	pass # Replace with function body.
+
+
+func get_class():
+	return "LevelDialogue"

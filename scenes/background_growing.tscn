@@ -19,7 +19,7 @@ tracks/0/keys = {
 }
 
 [node name="BackgroundGrowing" type="Polygon2D"]
-color = Color( 0.588235, 1, 0, 1 )
+color = Color( 0.764706, 0.992157, 0.290196, 1 )
 offset = Vector2( -120, -80 )
 polygon = PoolVector2Array( 0, 0, 240, 0, 240, 160, 0, 160 )
 script = ExtResource( 1 )

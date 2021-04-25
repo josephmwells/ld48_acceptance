@@ -1,14 +1,20 @@
 extends Node2D
+class_name LevelPuzzle
 
 const CELL_SIZE = {
 	x = 16,
 	y = 16
 }
 
+signal level_complete
 signal goal_entered
 signal intro_finished
+signal thought_ready(thought)
 
 # Declare member variables here. Examples:
+export(String) var dialogue_resource_path
+var dialogue
+
 var is_player_moving = false
 var goal_entered = false
 var window_active = false
@@ -18,10 +24,24 @@ var debug_line_arrow
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	#debug_line_arrow = debug_line($Player.global_position, $Player.arrow.direction * 10, Color(0, 0, 1, 1))
+	dialogue = load_json_file(dialogue_resource_path)
 	$Player.hide()
 	$Map.hide()
 	$Goal.hide()
 	$BackgroundGrowing.start()
+
+
+func load_json_file(path):
+	var file = File.new()
+	var err = file.open(path, File.READ)
+	if err != OK:
+		printerr("Could not open file, error code ", err)
+		return ""
+	var text = file.get_as_text()
+	file.close()
+	var json = JSON.parse(text)
+	return json
+
 
 func start_level():
 	reset()
@@ -89,19 +109,23 @@ func _input(event):
 
 func _on_Player_movement_finished():
 	is_player_moving = false
-	$Player.show_arrow()
+	if !goal_entered:
+		$Player.show_arrow()
 
 
 func _on_Goal_area_entered(area):
 	if area == $Player:
 		print("Player reached the goal!")
 		$Goal/CollisionShape2D.set_deferred("disabled", true)
+		$Player.hide_arrow()
 		emit_signal("goal_entered")
+		emit_signal("level_complete")
 		goal_entered = true
 
 
 func _on_BackgroundGrowing_growing_finished():
 	emit_signal("intro_finished")
+	emit_signal("thought_ready", dialogue.result.internal[0])
 	start_level()
 
 
@@ -111,10 +135,13 @@ func _on_ClickArea_input_event(viewport, event, shape_idx):
 
 func _on_ClickArea_mouse_entered():
 	window_active = true
-	if !is_player_moving:
+	if !is_player_moving and !goal_entered:
 		$Player.show_arrow()
 
 
 func _on_ClickArea_mouse_exited():
 	window_active = false
 	$Player.hide_arrow()
+
+func get_class():
+	return "LevelPuzzle"

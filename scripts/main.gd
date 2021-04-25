@@ -21,8 +21,12 @@ func load_next_scene():
 	
 	var next_level_resource = load("res://scenes/levels/level_0" + str(current_level_index) + ".tscn")
 	var next_level = next_level_resource.instance()
+	
+	print(get_children())
 
-	next_level.connect("goal_entered", self, "_on_Level_goal_entered")
+	next_level.connect("level_complete", self, "_on_Level_level_complete")
+	if next_level.get_class() == "LevelPuzzle":
+		next_level.connect("thought_ready", self, "_on_Level_thought_ready")
 	next_level.position = $LevelSpawnPosition.position
 	add_child(next_level)
 	
@@ -36,10 +40,16 @@ func load_next_scene():
 	current_level = next_level
 
 
-func _on_Level_goal_entered():
+func _on_Level_thought_ready(thought):
+	print("Thought ready")
+	print(thought)
+	$ContainerInternalDialogue.write_on(thought, 2)
+
+func _on_Level_level_complete():
 	$MarginContainer/VBoxContainer/ButtonGoDeeper.set_deferred("disabled", false)
 
 func _on_TextureButton_pressed():
+	$ContainerInternalDialogue.clear()
 	load_next_scene()
 	$MarginContainer/VBoxContainer/ButtonGoDeeper.set_deferred("disabled", true)
 
