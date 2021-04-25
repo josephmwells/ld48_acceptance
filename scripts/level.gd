@@ -6,10 +6,12 @@ const CELL_SIZE = {
 }
 
 signal goal_entered
+signal intro_finished
 
 # Declare member variables here. Examples:
 var is_player_moving = false
 var goal_entered = false
+var window_active = false
 var debug_line_arrow
 
 
@@ -25,7 +27,6 @@ func start_level():
 	reset()
 	$Player.position = $PlayerStartPosition.position
 	$Player.show()
-	$Player.show_arrow()
 	$Map.show()
 	$Goal.show()
 
@@ -48,13 +49,13 @@ func debug_line(from, to, color):
 func raycast_and_move(space_state):
 # Use global coordinates
 	# Debug Line for Arrow Direction
-	#debug_line($Player.global_position, $Player.global_position + $Player.arrow.direction * 240, Color( 1, 0, 0, 1))
+	#debug_line($Player.position, $Player.position + $Player.arrow.direction * 240, Color( 1, 0, 0, 1))
 
 	var result = space_state.intersect_ray($Player.global_position, $Player.global_position + $Player.arrow.direction * 240, [$Player])
 	
 	if result:
 		# Debug lien for the raytracea and collision
-		#debug_line($Player.global_position, result.position, Color(0, 1, 0, 1))
+		#debug_line($Player.position, result.position - global_position, Color(0, 1, 0, 1))
 
 		if $Player.global_position.distance_to(result.position) <= 8:
 			return
@@ -64,10 +65,11 @@ func raycast_and_move(space_state):
 
 		is_player_moving = true
 		$Player.move(snapped_position, 2)
+		$Player.hide_arrow()
 
 
 func _physics_process(delta):
-	if Input.is_mouse_button_pressed(BUTTON_LEFT) and !is_player_moving and !goal_entered:
+	if Input.is_mouse_button_pressed(BUTTON_LEFT) and window_active and !is_player_moving and !goal_entered:
 		var space_state = get_world_2d().direct_space_state
 		raycast_and_move(space_state)
 
@@ -75,8 +77,8 @@ func _physics_process(delta):
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	$Player.update_arrow_direction(get_global_mouse_position())
-	#debug_line_arrow.set_point_position(0, $Player.global_position)
-	#debug_line_arrow.set_point_position(1, $Player.global_position + $Player.arrow.direction * 10.0)
+	#debug_line_arrow.set_point_position(0, $Player.position)
+	#debug_line_arrow.set_point_position(1, $Player.position + $Player.arrow.direction * 10.0)
 
 
 func _input(event):
@@ -87,6 +89,7 @@ func _input(event):
 
 func _on_Player_movement_finished():
 	is_player_moving = false
+	$Player.show_arrow()
 
 
 func _on_Goal_area_entered(area):
@@ -98,4 +101,20 @@ func _on_Goal_area_entered(area):
 
 
 func _on_BackgroundGrowing_growing_finished():
+	emit_signal("intro_finished")
 	start_level()
+
+
+func _on_ClickArea_input_event(viewport, event, shape_idx):
+	pass # Replace with function body.
+
+
+func _on_ClickArea_mouse_entered():
+	window_active = true
+	if !is_player_moving:
+		$Player.show_arrow()
+
+
+func _on_ClickArea_mouse_exited():
+	window_active = false
+	$Player.hide_arrow()

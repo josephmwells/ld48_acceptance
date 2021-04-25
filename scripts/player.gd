@@ -17,7 +17,7 @@ func move(pos, duration):
 	tween.name = "Tween"
 	add_child(tween)
 
-	tween.interpolate_property(self, "position", position, pos, duration, Tween.TRANS_EXPO, Tween.EASE_IN_OUT)
+	tween.interpolate_property(self, "global_position", global_position, pos, duration, Tween.TRANS_EXPO, Tween.EASE_IN_OUT)
 	tween.start()
 	yield(tween, "tween_completed")
 	emit_signal("movement_finished")
@@ -30,7 +30,7 @@ func hide_arrow():
 	$ArrowSprite.hide()
 
 func update_arrow_direction(pos):
-	var angle = position.direction_to(pos).angle()
+	var angle = global_position.direction_to(pos).angle()
 	if(angle > -(3 * PI) / 4):
 		$ArrowSprite.position = Vector2(0, -1) * 16
 		$ArrowSprite.rotation = 3 * PI / 2

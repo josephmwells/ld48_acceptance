@@ -1,10 +1,13 @@
-[gd_scene load_steps=96 format=2]
+[gd_scene load_steps=97 format=2]
 
 [ext_resource path="res://assets/textures/tile_map.png" type="Texture" id=1]
 [ext_resource path="res://scenes/player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scripts/level.gd" type="Script" id=3]
 [ext_resource path="res://scenes/levels/background_growing.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/goal.tscn" type="PackedScene" id=5]
+
+[sub_resource type="RectangleShape2D" id=92]
+extents = Vector2( 120, 80 )
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
@@ -807,11 +810,17 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 } ]
 10/z_index = 0
 
-[node name="Level" type="Node2D"]
+[node name="LevelPuzzle" type="Node2D"]
 script = ExtResource( 3 )
 
 [node name="BackgroundGrowing" parent="." instance=ExtResource( 4 )]
 position = Vector2( 120, 80 )
+
+[node name="ClickArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ClickArea"]
+position = Vector2( 120, 80 )
+shape = SubResource( 92 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 
@@ -825,4 +834,6 @@ format = 1
 [node name="Goal" parent="." instance=ExtResource( 5 )]
 
 [connection signal="growing_finished" from="BackgroundGrowing" to="." method="_on_BackgroundGrowing_growing_finished"]
+[connection signal="mouse_entered" from="ClickArea" to="." method="_on_ClickArea_mouse_entered"]
+[connection signal="mouse_exited" from="ClickArea" to="." method="_on_ClickArea_mouse_exited"]
 [connection signal="area_entered" from="Goal" to="." method="_on_Goal_area_entered"]
