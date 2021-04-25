@@ -14,12 +14,14 @@ func _ready():
 
 func move(pos, duration):
 	var tween = Tween.new()
+	tween.name = "Tween"
 	add_child(tween)
-	
-	tween.start()
+
 	tween.interpolate_property(self, "position", position, pos, duration, Tween.TRANS_EXPO, Tween.EASE_IN_OUT)
+	tween.start()
 	yield(tween, "tween_completed")
 	emit_signal("movement_finished")
+	tween.queue_free()
 
 func show_arrow():
 	$ArrowSprite.show()

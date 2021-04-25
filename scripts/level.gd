@@ -5,21 +5,36 @@ const CELL_SIZE = {
 	y = 16
 }
 
+signal goal_entered
+
 # Declare member variables here. Examples:
 var is_player_moving = false
+var goal_entered = false
 var debug_line_arrow
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	debug_line_arrow = debug_line($Player.global_position, $Player.arrow.direction * 10, Color(0, 0, 1, 1))
+	#debug_line_arrow = debug_line($Player.global_position, $Player.arrow.direction * 10, Color(0, 0, 1, 1))
 	$Player.hide()
-	start_level()
+	$Map.hide()
+	$Goal.hide()
+	$BackgroundGrowing.start()
 
 func start_level():
+	reset()
 	$Player.position = $PlayerStartPosition.position
 	$Player.show()
 	$Player.show_arrow()
+	$Map.show()
+	$Goal.show()
+
+func reset():
+	if $Player.has_node("Tween"):
+		$Player.get_node("Tween").stop_all()
+		$Player.get_node("Tween").emit_signal("tween_completed")
+	$Goal/CollisionShape2D.set_deferred("disabled", false)
+	goal_entered = false
 
 func debug_line(from, to, color):
 	var line = Line2D.new()
@@ -52,17 +67,35 @@ func raycast_and_move(space_state):
 
 
 func _physics_process(delta):
-	if Input.is_mouse_button_pressed(BUTTON_LEFT) and !is_player_moving:
+	if Input.is_mouse_button_pressed(BUTTON_LEFT) and !is_player_moving and !goal_entered:
 		var space_state = get_world_2d().direct_space_state
 		raycast_and_move(space_state)
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	$Player.update_arrow_direction(get_global_mouse_position())
-	debug_line_arrow.set_point_position(0, $Player.global_position)
-	debug_line_arrow.set_point_position(1, $Player.global_position + $Player.arrow.direction * 10.0)
+	#debug_line_arrow.set_point_position(0, $Player.global_position)
+	#debug_line_arrow.set_point_position(1, $Player.global_position + $Player.arrow.direction * 10.0)
+
+
+func _input(event):
+	if event.is_action_pressed("ui_cancel"):
+		start_level()
+
 
 
 func _on_Player_movement_finished():
-	print("Player Global Position After Move: " + str($Player.global_position))
 	is_player_moving = false
+
+
+func _on_Goal_area_entered(area):
+	if area == $Player:
+		print("Player reached the goal!")
+		$Goal/CollisionShape2D.set_deferred("disabled", true)
+		emit_signal("goal_entered")
+		goal_entered = true
+
+
+func _on_BackgroundGrowing_growing_finished():
+	start_level()
