@@ -29,6 +29,7 @@ func _ready():
 	$Map.hide()
 	$Goal.hide()
 	$BackgroundGrowing.start()
+	$Label.hide()
 
 
 func load_json_file(path):
@@ -55,6 +56,7 @@ func reset():
 		$Player.get_node("Tween").stop_all()
 		$Player.get_node("Tween").emit_signal("tween_completed")
 	$Goal/CollisionShape2D.set_deferred("disabled", false)
+	$Label.hide()
 	goal_entered = false
 
 func debug_line(from, to, color):
@@ -118,6 +120,7 @@ func _on_Goal_area_entered(area):
 		print("Player reached the goal!")
 		$Goal/CollisionShape2D.set_deferred("disabled", true)
 		$Player.hide_arrow()
+		$Label.show()
 		emit_signal("goal_entered")
 		emit_signal("level_complete")
 		goal_entered = true

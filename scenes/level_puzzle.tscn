@@ -1,10 +1,11 @@
-[gd_scene load_steps=97 format=2]
+[gd_scene load_steps=99 format=2]
 
 [ext_resource path="res://assets/textures/tile_map.png" type="Texture" id=1]
 [ext_resource path="res://scenes/player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scripts/level.gd" type="Script" id=3]
 [ext_resource path="res://scenes/background_growing.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/goal.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/fonts/SourceSansPro-BoldItalic.ttf" type="DynamicFontData" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 120, 80 )
@@ -810,6 +811,9 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 } ]
 10/z_index = 0
 
+[sub_resource type="DynamicFont" id=92]
+font_data = ExtResource( 6 )
+
 [node name="LevelPuzzle" type="Node2D"]
 script = ExtResource( 3 )
 dialogue_resource_path = "res://assets/dialogue/dialogue_01"
@@ -833,6 +837,18 @@ cell_size = Vector2( 16, 16 )
 format = 1
 
 [node name="Goal" parent="." instance=ExtResource( 5 )]
+
+[node name="Label" type="Label" parent="."]
+margin_left = 80.0
+margin_top = 136.0
+margin_right = 157.0
+margin_bottom = 157.0
+custom_fonts/font = SubResource( 92 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "GO DEEPER"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [connection signal="growing_finished" from="BackgroundGrowing" to="." method="_on_BackgroundGrowing_growing_finished"]
 [connection signal="mouse_entered" from="ClickArea" to="." method="_on_ClickArea_mouse_entered"]

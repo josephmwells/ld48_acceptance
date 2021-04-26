@@ -11,6 +11,7 @@ var game_completed = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	load_next_scene("res://scenes/levels/level_00.tscn")
+	$MarginContainer/VBoxContainer/ButtonGoDeeper.set_deferred("disabled", true)
 	pass # Replace with function body.
 
 
