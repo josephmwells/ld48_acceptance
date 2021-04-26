@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://scenes/background_growing.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/fonts/SourceSansPro-BoldItalic.ttf" type="DynamicFontData" id=2]
@@ -27,6 +27,9 @@ font_data = ExtResource( 3 )
 [sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 7 )
 region = Rect2( 48, 80, 48, 48 )
+
+[sub_resource type="DynamicFont" id=92]
+font_data = ExtResource( 2 )
 
 [node name="LevelDialogue" type="Node2D"]
 script = ExtResource( 6 )
@@ -75,6 +78,33 @@ texture = SubResource( 5 )
 region_rect = Rect2( 0, 0, 48, 48 )
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LabelContinue" type="Label" parent="."]
+margin_left = 80.0
+margin_top = 136.0
+margin_right = 160.0
+margin_bottom = 157.0
+custom_fonts/font = SubResource( 92 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "CONTINUE"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LabelGoDeeper" type="Label" parent="."]
+visible = false
+margin_left = 80.0
+margin_top = 136.0
+margin_right = 160.0
+margin_bottom = 157.0
+custom_fonts/font = SubResource( 92 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "GO DEEPER"
+align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }

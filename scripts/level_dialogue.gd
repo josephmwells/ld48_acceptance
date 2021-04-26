@@ -20,6 +20,8 @@ func _ready():
 	$MarginContainer/RichTextLabel.set_percent_visible(0.0)
 	load_dialogue(current_dialogue_index)
 	$MarginContainer.hide()
+	$LabelContinue.hide()
+	$LabelGoDeeper.hide()
 	$BackgroundGrowing.start()
 
 func load_json_file(path):
@@ -59,6 +61,7 @@ func _on_BackgroundGrowing_growing_finished():
 	yield(get_tree().create_timer(1), "timeout")
 	emit_signal("intro_finished")
 	$MarginContainer.show()
+	$LabelContinue.show()
 	write_on(2)
 
 
@@ -74,6 +77,8 @@ func _on_MarginContainer_gui_input(event):
 		if current_dialogue_index > dialogue.result.doctor.size() - 1:
 			emit_signal("dialogue_finished")
 			emit_signal("level_complete")
+			$LabelContinue.hide()
+			$LabelGoDeeper.show()
 			return
 		load_dialogue(current_dialogue_index)
 		write_on(2)

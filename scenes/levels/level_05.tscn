@@ -7,3 +7,6 @@ dialogue_resource_path = "res://assets/dialogue/dialogue_03"
 
 [node name="BackgroundGrowing" parent="." index="0"]
 color = Color( 0.396078, 0.290196, 0.992157, 1 )
+
+[node name="LabelContinue" parent="." index="2"]
+margin_right = 72.0

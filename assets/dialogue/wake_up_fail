@@ -2,7 +2,6 @@
 	"doctor": [
 		"Ah, you're awake. Shame.",
 		"Well, you payed for 30 minutes. Would you like try again? You just need to [b][i]Go Deeper[/i][/b]",
-		"Thanks for playing!\nMade for the [b]Ludum Dare 48[/b] 48 Hour Game Jam Compo category.\nAll assets and code made by me for the Game Jam."
 	],
 	"internal": ["Thanks for playing!"]
 }
