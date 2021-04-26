@@ -74,7 +74,6 @@ func _on_MarginContainer_gui_input(event):
 		if current_dialogue_index > dialogue.result.doctor.size() - 1:
 			emit_signal("dialogue_finished")
 			emit_signal("level_complete")
-			$MarginContainer.hide()
 			return
 		load_dialogue(current_dialogue_index)
 		write_on(2)

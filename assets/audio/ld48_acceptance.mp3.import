@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/ld48_acceptance.mp3-75dd025a17d7e3578a0e96738ac69108.mp3str"
+
+[deps]
+
+source_file="res://assets/audio/ld48_acceptance.mp3"
+dest_files=[ "res://.import/ld48_acceptance.mp3-75dd025a17d7e3578a0e96738ac69108.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

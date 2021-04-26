@@ -6,7 +6,7 @@
 dialogue_resource_path = "res://assets/dialogue/dialogue_02"
 
 [node name="BackgroundGrowing" parent="." index="0"]
-color = Color( 0.992157, 0.290196, 0.768627, 1 )
+color = Color( 0.921569, 0.290196, 0.992157, 1 )
 
 [node name="PlayerStartPosition" parent="." index="3"]
 position = Vector2( 72, 40 )
@@ -16,5 +16,3 @@ tile_data = PoolIntArray( 65540, 7, 65536, 65541, 7, 65536, 65542, 7, 65536, 655
 
 [node name="Goal" parent="." index="5"]
 position = Vector2( 168, 120 )
-
-[connection signal="movement_finished" from="Player" to="." method="_on_Player_movement_finished"]

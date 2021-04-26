@@ -1,7 +1,7 @@
 {
 	"doctor": [
-		"Very good. You've recently experienced a loss in your life. They aren't going to come back in your current condition.",
-		"You need to accept that you are the reason for this loss. [b][i]Go Deeper[/b][/b] and come to terms with the role you play."
+		"However, just accepting the reality is not enough. In order for recovery, there needs to be real action and change.",
+		"It isn't good enough to just settle on how things are. How can things be better? You need to [b][i]Go Deeper[/b][/i]"
 	],
-	"internal": ["A loss in my life . . . It hurts so much. Why did this have to happen to me."]
+	"internal": ["Fine! It's my fault! Are you happy yet? Can we just move on from this?"]
 }

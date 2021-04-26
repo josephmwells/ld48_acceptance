@@ -1,7 +1,11 @@
 {
 	"doctor": [
-		"Very good. You've recently experienced a loss in your life. They aren't going to come back in your current condition.",
-		"You need to accept that you are the reason for this loss. [b][i]Go Deeper[/b][/b] and come to terms with the role you play."
+		"You're almost there. You need to understand that this only happened because of your actions.",
+		"You can blame people all you want, but that doesn't change the fact that it is you who caused this.",
+		"Does this make you a bad person? No, it doesn't. We all make mistakes. Sometimes things can feel out of our control.",
+		"But, what do you have control over is how you move forward. You have the agency to become a better person.",
+		"It might feel impossible, but remember your support system. If you need help, all you have to do is ask. It's not as scary as it seems.",
+		"I think it's time for you to [b][i]Wake Up[/b][/i]."
 	],
-	"internal": ["A loss in my life . . . It hurts so much. Why did this have to happen to me."]
+	"internal": ["I can do this."]
 }

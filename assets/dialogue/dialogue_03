@@ -1,7 +1,6 @@
 {
 	"doctor": [
-		"Very good. You've recently experienced a loss in your life. They aren't going to come back in your current condition.",
-		"You need to accept that you are the reason for this loss. [b][i]Go Deeper[/b][/b] and come to terms with the role you play."
+		"You must face the facts. You can't keep denying what you did to make them leave you. You need to [b][i]Go Deeper[/b][/i]"
 	],
-	"internal": ["A loss in my life . . . It hurts so much. Why did this have to happen to me."]
+	"internal": ["It wasn't my fault! They were the one who pushed me to the edge!"]
 }
