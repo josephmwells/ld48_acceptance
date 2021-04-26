@@ -4,3 +4,6 @@
 
 [node name="LevelDialogue" instance=ExtResource( 1 )]
 dialogue_resource_path = "res://assets/dialogue/wake_up_success"
+
+[node name="LabelGoDeeper" parent="." index="3"]
+text = ""

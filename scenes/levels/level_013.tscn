@@ -7,3 +7,6 @@ dialogue_resource_path = "res://assets/dialogue/dialogue_07"
 
 [node name="BackgroundGrowing" parent="." index="0"]
 color = Color( 1, 1, 1, 1 )
+
+[node name="LabelGoDeeper" parent="." index="3"]
+text = "WAKE UP"
