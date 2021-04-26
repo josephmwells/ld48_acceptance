@@ -33,7 +33,8 @@ _global_script_class_icons={
 [application]
 
 config/name="ld48_acceptance"
-config/icon="res://icon.png"
+run/main_scene="res://scenes/main.tscn"
+config/icon="res://assets/textures/player.png"
 
 [display]
 
