@@ -3,7 +3,7 @@ Entry for the Ludum Dare 48 Game Jam. A game about going through the cycles of a
 
 # Acceptance Is A Cycle
 
-![screenshot_00](screenshot_00.png)
+<img src="screenshot_00.png" width="500">
 
 ### Undergo hypnosis in order to find what you're looking for
 
@@ -11,15 +11,15 @@ Acceptance is a sliding puzzle game. Slide your way through the maze and get to 
 
 ------
 
-![screenshot_01](screenshot_01.png)
+<img src="screenshot_01.png" width="500">
 
 ### *_Go deeper_* to discover the truth
 
-![screenshot_02](screenshot_02.png)
+<img src="screenshot_02.png" width="500">
 
 ### Don't lose *_focus_*
 
-![screenshot_03](screenshot_03.png)
+<img src="screenshot_03.png" width="500">
 
 ### _You're almost there_
 ------
